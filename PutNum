@@ -1,0 +1,106 @@
+import java.io.*;
+
+final public class PutNum {
+	private static int[] arr = new int[4];
+	private static int bull;
+	static RandNum rand = new RandNum();
+	
+	public static void Input() throws EqualException, IOException {
+
+		       int cow;
+		       System.out.println("Консольная игра <Быки и коровы>"
+							+ "Правила игры:"
+							+ '\n'
+							+ "- вам необходимо ввести четырёхзначное число при этом цифры не должны повторяться;"
+							+ '\n'
+							+ "- программа будет запрашивать число до тех пор пока Вы не угадаете или не введёте одинаковые числа."
+							+ '\n' + "Удачи !");
+				do {				
+			   bull = 0;
+			  cow = 0;
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));				
+			
+//			System.out.println(rand.getNum1() + "" + rand.getNum2()
+//						 + rand.getNum3() + "" + "(*) - угадай эту цифру");
+			System.out.println("Введите непоторяемые числа:   ");
+			
+			try {				
+				String str;
+				str = br.readLine();
+				
+				while (str.length() == 0){
+					System.out.println("Вы ничего не ввели" + '\n' +" введите непоторяемые числа:   ");
+					str = br.readLine();		
+			}
+				while (str.length() < 4){
+						System.out.println("Вы ввели символы меньше четырёхзначного, введите непоторяемые числа:   ");
+				str = br.readLine();											
+				}
+				while (str.length() > 4){
+					System.out.println("Вы ввели символы меньше четырёхзначного, введите непоторяемые числа:   ");
+					str = br.readLine();
+				}
+				if (str.length() == 4){
+				for (int i = 0; i < 4; i++) {
+					arr[i] = Integer.parseInt(String.valueOf(str.charAt(i)));
+//					while (arr.length != 4){
+//						System.out.println("Вы более 4 чисел:   ");
+//						str = br.readLine();
+					}
+				
+				if (arr[0] == arr[1]|| arr[0] == arr[2] || arr[0] == arr[3]
+						|| arr[2] == arr[3] || arr[1] == arr[3]|| arr[1] == arr[2])
+					throw new EqualException();
+
+				if (arr[0] == rand.getNum1()) {
+					++bull;
+				}
+				if (arr[1] == rand.getNum2()) {
+					++bull;
+				}
+				if (arr[2] == rand.getNum3()) {
+					++bull;
+				}
+				if (arr[3] == rand.getNum4()) {
+					++bull;
+				}
+				System.out.print("Найдено быков  =  " + bull);
+
+				for (int i = 0; i < 4; i++) {
+					if (arr[i] == rand.getNum1() ) {
+						++cow;
+					}
+				}
+
+				for (int i = 0; i < 4; i++) {
+					if (arr[i] == rand.getNum2()) {
+						++cow;
+					}
+				}
+
+				for (int i = 0; i < 4; i++) {
+					if (arr[i] == rand.getNum3()) {
+						++cow;
+					}	
+				}
+		
+			for (int i = 0; i < 4; i++) {
+				if ( arr[i] == rand.getNum4()) {
+					++cow;
+				}
+			}	
+				}
+				
+			System.out.println(" Найдено коров  =  " + cow);
+
+			}catch (NumberFormatException e) {
+			System.out.print("Используйте числа" + '\n');
+		}
+					
+				if (bull == 4) {
+			System.out.println("Вы выиграли !!!");
+		}
+			}while (bull < 4);			
+
+	}
+}
