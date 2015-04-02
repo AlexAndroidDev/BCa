@@ -1,0 +1,20 @@
+import java.io.IOException;
+
+final public class Launcher {
+
+	public static void main(String[] args) throws IOException, EqualException {
+
+		RandNum rand = new RandNum();
+		PutNum put = new PutNum();
+		Frame sh = new Frame();	
+//		sh.createAndShow();
+		
+//		 System.out.println(rand.getNum1() + "" + rand.getNum2()
+//		 + rand.getNum3() + "" + rand.getNum4());
+		try {
+			PutNum.Input();
+		} catch (EqualException S) {
+			System.err.println("Вы ввели одинаковые числа (пожалуйста следуйте правлам игры)");
+		}
+	}
+}
